@@ -15,6 +15,8 @@ void	iter(T *array, ssize_t length, void (*f)(T &))
 		f(array[i]);
 }
 
+// const 修飾子がついた関数は非変更の操作を行うことが保証されているため、関数が引数を変更しないことが期待される
+// const T *arrayとするべき。error: call to 'iter' is ambiguousもある
 template <typename T>
 void	iter(const T *array, ssize_t length, void (*f)(const T &))//constバージョン
 {

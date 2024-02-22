@@ -14,7 +14,7 @@ void	swap(T &a, T &b)
 }
 
 template <typename T>
-const T &min(const T &a, const T &b)
+const T &min(const T &a, const T &b)//値を書き換えないためconstにしておくべき
 {
 	return (a < b ? a : b);
 }

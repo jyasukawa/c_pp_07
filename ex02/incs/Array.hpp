@@ -12,9 +12,9 @@ class Array
 		Array &operator=(const Array &rhs);
 		~Array(void);
 
-		Array(const unsigned int n);
-		T &operator[](const ssize_t i);
-		const T &operator[](const ssize_t i) const;
+		Array(const unsigned int &n);
+		T &operator[](const ssize_t &i);
+		const T &operator[](const ssize_t &i) const;
 		unsigned int	size() const;//musn’t modify the current instance 
 
 	private:
@@ -64,9 +64,13 @@ Array<T>::~Array(void)
 
 
 template <typename T>
-Array<T>::Array(const unsigned int n)// : _array(new T[n]), _size(n)
+Array<T>::Array(const unsigned int &n)// : _array(new T[n]), _size(n)
 {
 	// std::cout << "Array unsigned int constructor called" << std::endl;
+	if (n < 0)
+		std::cout << "ggg" << std::endl;
+	this->_array = NULL;
+	this->_size = n;
 	if (n != 0)
 	{
 		this->_array = new(std::nothrow) T[n];
@@ -75,11 +79,10 @@ Array<T>::Array(const unsigned int n)// : _array(new T[n]), _size(n)
 		for (unsigned int i = 0; i < n; i++)
 			this->_array[i] = 0;//Tのデータ型が何になるかわからないため、=0で初期化
 	}
-	this->_size = n;
 }
 
 template <typename T>
-T	&Array<T>::operator[](const ssize_t i)//要素への読み書きアクセス
+T	&Array<T>::operator[](const ssize_t &i)//要素への読み書きアクセス
 {
 	if (i < 0 || static_cast<unsigned int>(i) >= this->_size || this->_size == 0)//this->_sizeはuintなのでマイナスはない
 		throw std::exception();
@@ -87,7 +90,7 @@ T	&Array<T>::operator[](const ssize_t i)//要素への読み書きアクセス
 }
 
 template <typename T>
-const T	&Array<T>::operator[](const ssize_t i) const//constパターン、要素への読み取り専用アクセス
+const T	&Array<T>::operator[](const ssize_t &i) const//constパターン、要素への読み取り専用アクセス
 {
 	if (i < 0 || static_cast<unsigned int>(i) >= this->_size || this->_size == 0)
 		throw std::exception();
